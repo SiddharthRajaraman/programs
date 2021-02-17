@@ -1,6 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
+import time
+
+#compile time stuff
+start_time = time.time()
 
 df = pd.read_csv("waterquality.csv", encoding = 'latin1')
 print(df.head())
@@ -17,26 +21,7 @@ plt.show()
 # outliers dataframe
 outliers = data[model.labels_ == -1]
 print(outliers)
-'''
-from sklearn.cluster import DBSCAN
-from sklearn.datasets import make_blobs
-from numpy import random, where
-import matplotlib.pyplot as plt
 
-random.seed(7)
-x, _ = make_blobs(n_samples=200, centers=1, cluster_std=.3, center_box=(20, 5))
 
-plt.scatter(x[:,0], x[:,1])
-plt.show()
+print("Process finished --- %s seconds ---" % (time.time() - start_time))
 
-dbscan = DBSCAN(eps = 0.28, min_samples = 20)
-print(dbscan)
-
-pred = dbscan.fit_predict(x)
-anom_index = where(pred == -1)
-values = x[anom_index]
-
-plt.scatter(x[:,0], x[:,1])
-plt.scatter(values[:,0], values[:,1], color='r')
-plt.show()
-'''
