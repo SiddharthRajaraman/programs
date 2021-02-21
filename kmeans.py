@@ -10,17 +10,20 @@ import time
 #compile time stuff
 start_time = time.time()
 
-data = pd.read_csv('waterquality.csv', encoding = 'latin1', usecols = ['pH'])
+data = pd.read_csv('waterquality.csv', encoding = 'latin1')
 #print(data)
 
+data = data.dropna(subset = ["TEMP"])
 
+
+data = data['TEMP']
+data = data.to_frame()
 
 data = data.to_numpy()
+temp = data
 
 
 
-
-#print(x)
  
 '''
 plt.plot(data)
@@ -30,11 +33,11 @@ plt.show()
 data = scale(data)
 
 kmeans = KMeans(n_clusters = 1).fit(data)
-#print(kmeans)
+
 
 
 center = kmeans.cluster_centers_
-#print(center)
+
 
 distance = sqrt((data - center)**2)
 
@@ -43,13 +46,18 @@ indexes = order_index[-10:]
 
 values = data[indexes]
 
-'''
+
 plt.plot(data)
 plt.scatter(indexes, values, color='r')
 plt.show()
-'''
+
 
 print(indexes)
-print(values)
+
+
+for i in indexes:
+    print(temp[i])
+
+
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))
