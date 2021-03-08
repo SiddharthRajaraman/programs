@@ -17,18 +17,40 @@ data = data.dropna(subset = ["TEMP"])
 
 
 data = data['TEMP']
+
+
+
 data = data.to_frame()
+dataList = data['TEMP'].values.tolist()
+
+'''
+dataList.insert(30, 32)
+dataList.insert(50, 9)
+dataList.insert(100, 32.2)
+dataList.insert(200, 15.2)
+dataList.insert(216, 16)
+dataList.insert(350, 15)
+dataList.insert(351, 32)
+dataList.insert(476, 30)
+dataList.insert(498, 16)
+dataList.insert(295, 30)
+'''
+
+
+
+data = pd.DataFrame(dataList, columns = ['TEMP'])
+
+
 
 data = data.to_numpy()
 temp = data
 
 
-
  
-'''
+
 plt.plot(data)
 plt.show()
-'''
+
 
 data = scale(data)
 
@@ -42,12 +64,12 @@ center = kmeans.cluster_centers_
 distance = sqrt((data - center)**2)
 
 order_index = argsort(distance, axis = 0)
-indexes = order_index[-10:]
+indexes = order_index[-20:]
 
-values = data[indexes]
+values = temp[indexes]
 
 
-plt.plot(data)
+plt.plot(temp)
 plt.scatter(indexes, values, color='r')
 plt.show()
 
@@ -61,3 +83,9 @@ for i in indexes:
 
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))
+
+
+
+#points:
+
+
