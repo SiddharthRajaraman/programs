@@ -16,14 +16,15 @@ data = pd.read_csv('waterquality.csv', encoding = 'latin1')
 data = data.dropna(subset = ["TEMP"])
 
 
-data = data['TEMP']
+data = data['pH']
 
 
 
 data = data.to_frame()
-dataList = data['TEMP'].values.tolist()
+dataList = data['pH'].values.tolist()
 
 '''
+#temp
 dataList.insert(30, 32)
 dataList.insert(50, 9)
 dataList.insert(100, 32.2)
@@ -36,9 +37,21 @@ dataList.insert(498, 16)
 dataList.insert(295, 30)
 '''
 
+#pH
+dataList.insert(200, 10.2)
+dataList.insert(100, 6.4)
+dataList.insert(500, 9.7)
+dataList.insert(180, 6.6)
+dataList.insert(20, 9)
+dataList.insert(300, 8.6)
+dataList.insert(500, 6.7)
+dataList.insert(310, 10)
+dataList.insert(112, 10)
+dataList.insert(70, 6.8)
 
 
-data = pd.DataFrame(dataList, columns = ['TEMP'])
+
+data = pd.DataFrame(dataList, columns = ['pH'])
 
 
 
@@ -47,9 +60,11 @@ temp = data
 
 
  
-
+'''
 plt.plot(data)
 plt.show()
+'''
+
 
 
 data = scale(data)
@@ -87,5 +102,4 @@ print("Process finished --- %s seconds ---" % (time.time() - start_time))
 
 
 #points:
-
 
