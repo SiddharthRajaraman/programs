@@ -1,0 +1,75 @@
+import pandas as pd
+import numpy as np
+import random as rd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('waterquality.csv', encoding = 'latin1')
+#data.head()
+
+X = data["pH"]
+'''
+plt.scatter(range(len(X)),X,c='black')
+plt.show()
+'''
+
+
+
+K=3
+
+
+
+
+
+Centroids = (X.sample(n=K))
+
+centroidsList = Centroids.tolist()
+
+XList = X.tolist()
+
+print(Centroids.index)
+plt.scatter(range(len(X)),X,c='black')
+#plt.scatter(Centroids.index, Centroids,c='red')
+plt.show()
+
+dist1List = []
+dist2List = []
+dist3List = []
+
+dist1Index = []
+dist2Index = []
+dist3Index = []
+
+
+for i in range(len(XList)):
+    dist1 = np.linalg.norm(centroidsList[0] - XList[i])
+    dist2 = np.linalg.norm(centroidsList[1] - XList[i])
+    dist3 = np.linalg.norm(centroidsList[2] - XList[i])
+    
+    if dist1 < dist2 and dist1 < dist3:
+        dist1List.append(XList[i])
+        dist1Index.append(i)
+    elif dist2 < dist1 and dist2 < dist3:
+        dist2List.append(XList[i])
+        dist2Index.append(i)
+    elif dist3 < dist1 and dist3 < dist2:
+        dist3List.append(XList[i])
+        dist3Index.append(i)
+        
+
+    
+dist1Series = pd.Series(dist1List)
+dist2Series = pd.Series(dist2List)
+dist3Series = pd.Series(dist3List)
+    
+plt.scatter(range(len(X)),X,c='black')
+plt.scatter(dist1Index,dist1List, c = 'red')
+plt.scatter(dist2Index,dist2List, c = 'orange')
+plt.scatter(dist3Index,dist3List, c = 'blue')
+plt.show()
+    
+print(len(dist1List))
+print(len(dist2List))
+print(len(dist3List))
+
+
+print(len(XList))
