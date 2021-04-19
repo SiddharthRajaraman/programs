@@ -1,0 +1,63 @@
+import pandas as pd
+import numpy as np
+import random as rd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('waterquality.csv', encoding = 'latin1')
+#data.head()
+
+X = data["pH"]
+'''
+plt.scatter(range(len(X)),X,c='black')
+plt.show()
+'''
+
+
+
+K=1
+
+
+
+
+
+Centroids = (X.sample(n=K))
+
+centroidsList = Centroids.tolist()
+
+XList = X.tolist()
+
+print(XList)
+
+
+print(Centroids.index)
+plt.scatter(range(len(X)),X,c='black')
+#plt.scatter(Centroids.index, Centroids,c='red')
+plt.show()
+
+distances = []
+
+for i in range(len(XList)):
+    dist = np.linalg.norm(centroidsList[0] - XList[i])
+    distances.append(dist)
+
+    
+outliers = []
+outlierIndex = []
+
+meanDist = 0;
+for i in distances:
+    meanDist += i
+meanDist = meanDist/len(distances)
+
+for i in range(len(distances)):
+    if (distances[i] > meanDist):
+        outliers.append(XList[i])
+        outlierIndex.append(i)
+
+print(len(outliers))
+
+print(outliers)
+        
+plt.scatter(range(len(X)), X, c = 'black')
+plt.scatter(outlierIndex, outliers, c = 'blue')
+plt.show()
